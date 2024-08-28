@@ -8,6 +8,8 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import twmmeredydd.swivel.client.config.SwivelConfig;
+import twmmeredydd.swivel.client.config.SwivelConfigManager;
 
 public class SwivelClient implements ClientModInitializer {
 	public static final String MOD_ID = "swivel";
@@ -22,6 +24,8 @@ public class SwivelClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
+		SwivelConfigManager.load();
+
 		swivelLeft = registerKeyBind("swivel_left", InputConstants.Type.KEYSYM, InputConstants.KEY_LEFT);
 		swivelRight = registerKeyBind("swivel_right", InputConstants.Type.KEYSYM, InputConstants.KEY_RIGHT);
 		swivelUp = registerKeyBind("swivel_up", InputConstants.Type.KEYSYM, InputConstants.KEY_UP);
@@ -33,17 +37,18 @@ public class SwivelClient implements ClientModInitializer {
 	}
 
 	private void tick(Minecraft client) {
+		SwivelConfig config = SwivelConfigManager.getConfig();
 		while (swivelLeft.consumeClick()) {
-			client.player.turn(-300, 0);
+			client.player.turn(-config.horizontalSwivelDegrees/0.15, 0);
 		}
 		while (swivelRight.consumeClick()) {
-			client.player.turn(300, 0);
+			client.player.turn(config.horizontalSwivelDegrees/0.15, 0);
 		}
 		while (swivelUp.consumeClick()) {
-			client.player.turn(0, -300);
+			client.player.turn(0, -config.verticalSwivelDegrees/0.15);
 		}
 		while (swivelDown.consumeClick()) {
-			client.player.turn(0, 300);
+			client.player.turn(0, config.verticalSwivelDegrees/0.15);
 		}
 		while (zeroX.consumeClick()) {
 			client.player.turn(0, -client.player.getXRot()/0.15);
