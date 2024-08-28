@@ -1,0 +1,9 @@
+{
+  "swivel.key.category": "Swivel",
+  "swivel.key.swivel_left": "Swivel Left",
+  "swivel.key.swivel_right": "Swivel Right",
+  "swivel.key.swivel_up": "Swivel Up",
+  "swivel.key.swivel_down": "Swivel Down",
+  "swivel.key.zero_x": "Zero X Rotation",
+  "swivel.key.zero_y": "Zero Y Rotation"
+}
